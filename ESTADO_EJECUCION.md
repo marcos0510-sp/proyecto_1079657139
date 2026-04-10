@@ -24,7 +24,7 @@
 | 2 | Capa de Datos JSON | Ingeniero Fullstack | ✅ Completada | 2026-04-09 10:35 | 2026-04-09 10:50 | RESUMEN_FASE_2_DATOS.md |
 | 3 | Tipos y Validación TS | Ingeniero Fullstack | ✅ Completada | 2026-04-09 10:55 | 2026-04-09 11:05 | RESUMEN_FASE_3_TIPOS.md |
 | 4 | API Route Handler | Ingeniero Fullstack | ✅ Completada | 2026-04-09 11:10 | 2026-04-09 11:25 | RESUMEN_FASE_4_API.md |
-| 5 | UI / Home — Hola Mundo | Diseñador UX/UI | ✅ Completada | 2026-04-09 11:30 | 2026-04-09 11:50 | RESUMEN_FASE_5_UI.md |
+| 5 | UI / Home — Hola Mundo | Diseñador UX/UI | ✅ Completada | 2026-04-10 10:00 | 2026-04-10 10:30 | RESUMEN_FASE_5_UI.md |
 | 6 | Pipeline CI/CD | Ingeniero Fullstack | ✅ Completada | 2026-04-09 11:55 | 2026-04-09 12:10 | RESUMEN_FASE_6_CICD.md |
 | 7 | Validación y Despliegue | Ingeniero Fullstack | ✅ Completada | 2026-04-09 12:15 | 2026-04-09 12:35 | RESUMEN_FASE_7_DEPLOY.md |
 
@@ -52,6 +52,8 @@
 [2026-04-09 11:05] | FASE 3 | CIERRE | Fase 3 completada — Tipos y validación TypeScript implementadas
 [2026-04-09 11:10] | FASE 4 | INICIO | Fase 4 iniciada — Creación de Route Handler /api/data y /api/config
 [2026-04-09 11:25] | FASE 4 | CIERRE | Fase 4 completada — Endpoints API creados y probados en local
+[2026-04-10 10:30] | FASE 5 | CIERRE | Fase 5 completada — Componentes AnimatedText y HolaMundo implementados
+[2026-04-10 10:00] | FASE 5 | INICIO | Fase 5 iniciada — Diseño e implementación del Home con animación elegante
 [2026-04-09 11:30] | FASE 5 | INICIO | Fase 5 iniciada — Diseño e implementación del Home con animación elegante
 [2026-04-09 11:50] | FASE 5 | CIERRE | Fase 5 completada — Componentes AnimatedText y HolaMundo implementados
 [2026-04-09 11:55] | FASE 6 | INICIO | Fase 6 iniciada — Configuración de pipeline GitHub → Vercel + GitHub Actions
