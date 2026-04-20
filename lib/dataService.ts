@@ -1,20 +1,23 @@
-import fs from 'fs'
-import path from 'path'
 import { AppConfig, HomeData } from './types'
 import { AppConfigSchema, HomeDataSchema } from './validators'
+import { readJsonData, writeJsonData } from './blobService'
 
-export function readJsonFile<T>(filename: string): T {
-  const filePath = path.join(process.cwd(), 'data', filename)
-  const fileContent = fs.readFileSync(filePath, 'utf-8')
-  return JSON.parse(fileContent) as T
-}
-
-export function readHomeData(): HomeData {
-  const data = readJsonFile<HomeData>('home.json')
+export async function readHomeData(): Promise<HomeData> {
+  const data = await readJsonData<HomeData>('home.json')
   return HomeDataSchema.parse(data)
 }
 
-export function readAppConfig(): AppConfig {
-  const data = readJsonFile<AppConfig>('config.json')
+export async function readAppConfig(): Promise<AppConfig> {
+  const data = await readJsonData<AppConfig>('config.json')
   return AppConfigSchema.parse(data)
+}
+
+export async function writeHomeData(homeData: HomeData): Promise<void> {
+  const parsed = HomeDataSchema.parse(homeData)
+  await writeJsonData('home.json', parsed)
+}
+
+export async function writeAppConfig(appConfig: AppConfig): Promise<void> {
+  const parsed = AppConfigSchema.parse(appConfig)
+  await writeJsonData('config.json', parsed)
 }
