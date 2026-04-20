@@ -5,15 +5,15 @@ import type { Metadata } from 'next'
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const homeData = readHomeData()
+  const homeData = await readHomeData()
   return {
     title: homeData.meta.pageTitle,
     description: homeData.meta.description,
   }
 }
 
-export default function HomePage() {
-  const homeData = readHomeData()
+export default async function HomePage() {
+  const homeData = await readHomeData()
 
   return (
     <main className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center px-4 py-16 overflow-hidden">
