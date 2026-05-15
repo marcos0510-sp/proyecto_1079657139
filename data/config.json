@@ -1,6 +1,4 @@
 {
-  "appName": "Mi App TypeScript",
-  "version": "1.0.0",
-  "locale": "es-CO",
-  "theme": "dark"
+  "version": "1.0",
+  "system_name": "AgroStock Pro"
 }

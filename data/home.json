@@ -1,23 +1,12 @@
 {
   "hero": {
-    "title": "Hola Mundo",
-    "subtitle": "TypeScript + Next.js + Vercel",
-    "description": "Sistema fullstack funcionando correctamente.",
+    "title": "Bienvenido a AgroStock Pro",
+    "subtitle": "Inventario agropecuario multifinca y multibodega",
+    "description": "Sistema fullstack en Next.js y TypeScript para controlar productos, stock y transferencias.",
     "animationStyle": "typewriter"
   },
   "meta": {
-    "pageTitle": "Home | Mi App",
-    "description": "Página principal del sistema"
-  }
-}{
-  "hero": {
-    "title": "Hola Mundo",
-    "subtitle": "TypeScript + Next.js + Vercel",
-    "description": "Sistema fullstack funcionando correctamente.",
-    "animationStyle": "typewriter"
-  },
-  "meta": {
-    "pageTitle": "Home | Mi App",
+    "pageTitle": "AgroStock Pro",
     "description": "Página principal del sistema"
   }
 }
