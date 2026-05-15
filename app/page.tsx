@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { AppLayout } from '@/components/AppLayout'
 import { KpiCard, AlertsPanel, RecentMovements } from '@/components/dashboard'
@@ -42,11 +42,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const { addToast } = useToast()
 
-  useEffect(() => {
-    loadDashboardData()
-  }, [])
-
-  const loadDashboardData = async () => {
+  const loadDashboardData = useCallback(async () => {
     try {
       const meResponse = await fetch('/api/auth/me')
       if (!meResponse.ok) {
@@ -98,7 +94,11 @@ export default function DashboardPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [addToast])
+
+  useEffect(() => {
+    loadDashboardData()
+  }, [loadDashboardData])
 
   const handleAlertClick = (alert: Alert) => {
     if (alert.type === 'pending_transfer') {

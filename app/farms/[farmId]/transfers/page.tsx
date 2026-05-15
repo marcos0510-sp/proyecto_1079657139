@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { AppLayout } from '@/components/AppLayout'
@@ -40,11 +40,7 @@ export default function TransfersPage() {
   })
   const { addToast } = useToast()
 
-  useEffect(() => {
-    loadTransfers()
-  }, [params.farmId, filters])
-
-  const loadTransfers = async () => {
+  const loadTransfers = useCallback(async () => {
     try {
       const queryParams = new URLSearchParams()
       if (filters.status) queryParams.set('status', filters.status)
@@ -63,7 +59,11 @@ export default function TransfersPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [params.farmId, filters, addToast])
+
+  useEffect(() => {
+    loadTransfers()
+  }, [loadTransfers])
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters(prev => ({ ...prev, [key]: value }))

@@ -30,10 +30,6 @@ export default function PendingTransfersPage() {
   const [processing, setProcessing] = useState<string | null>(null)
   const { addToast } = useToast()
 
-  useEffect(() => {
-    loadPendingTransfers()
-  }, [params.farmId])
-
   const loadPendingTransfers = useCallback(async () => {
     try {
       const response = await fetch(`/api/farms/${params.farmId}/transfers/pending`)
@@ -49,6 +45,10 @@ export default function PendingTransfersPage() {
       setLoading(false)
     }
   }, [params.farmId, addToast])
+
+  useEffect(() => {
+    loadPendingTransfers()
+  }, [loadPendingTransfers])
 
   const handleApprove = async (transferId: string) => {
     setProcessing(transferId)

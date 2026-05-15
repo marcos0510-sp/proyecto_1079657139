@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { withAuth } from '@/lib/withAuth'
 import { withFarmAccess } from '@/lib/withFarmAccess'
-import { getWarehouses, createWarehouse } from '@/lib/dataService'
-import { CreateWarehouseSchema } from '@/lib/schemas'
+import { getCategories, createCategory } from '@/lib/dataService'
+import { CreateCategorySchema } from '@/lib/schemas'
 
 export async function GET(
   req: NextRequest,
@@ -15,8 +15,8 @@ export async function GET(
     // Verify farm access
     await withFarmAccess(userId, farmId, 'trabajador')
 
-    const warehouses = await getWarehouses(farmId, userId)
-    return NextResponse.json(warehouses)
+    const categories = await getCategories(farmId)
+    return NextResponse.json(categories)
   })
 }
 
@@ -31,9 +31,9 @@ export async function POST(
     await withFarmAccess(userId, farmId, 'admin')
 
     const body = await req.json()
-    const data = CreateWarehouseSchema.parse({ ...body, farm_id: farmId })
+    const data = CreateCategorySchema.parse(body)
 
-    const warehouse = await createWarehouse(userId, data)
-    return NextResponse.json(warehouse, { status: 201 })
+    const category = await createCategory(farmId, userId, data)
+    return NextResponse.json(category, { status: 201 })
   })
 }

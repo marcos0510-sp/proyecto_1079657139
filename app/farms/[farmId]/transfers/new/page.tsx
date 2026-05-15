@@ -42,12 +42,6 @@ export default function NewTransferPage() {
   })
   const { addToast } = useToast()
 
-  useEffect(() => {
-    loadFarms()
-    loadOriginWarehouses()
-    loadProducts()
-  }, [loadFarms, loadOriginWarehouses, loadProducts])
-
   const loadFarms = useCallback(async () => {
     try {
       const response = await fetch('/api/farms')
@@ -98,6 +92,12 @@ export default function NewTransferPage() {
       addToast('Error al cargar productos', 'error')
     }
   }, [params.farmId, addToast])
+
+  useEffect(() => {
+    loadFarms()
+    loadOriginWarehouses()
+    loadProducts()
+  }, [loadFarms, loadOriginWarehouses, loadProducts])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

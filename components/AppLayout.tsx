@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Sidebar } from './Sidebar'
 import { SeedModeBanner } from './SeedModeBanner'
@@ -30,9 +30,35 @@ export function AppLayout({ children }: AppLayoutProps) {
   const router = useRouter()
   const pathname = usePathname()
 
+  const checkAuth = useCallback(async () => {
+    try {
+      const response = await fetch('/api/auth/me')
+      if (response.ok) {
+        const userData = await response.json()
+        setUser(userData.user)
+
+        // Set active farm to the first one or from localStorage
+        const savedFarmId = localStorage.getItem('activeFarmId')
+        const farms = userData.farms
+        if (savedFarmId && farms.some((f: any) => f.id === savedFarmId)) {
+          setActiveFarmId(savedFarmId)
+        } else if (farms.length > 0) {
+          setActiveFarmId(farms[0].id)
+          localStorage.setItem('activeFarmId', farms[0].id)
+        }
+      } else {
+        router.push('/login')
+      }
+    } catch (error) {
+      router.push('/login')
+    } finally {
+      setLoading(false)
+    }
+  }, [router])
+
   useEffect(() => {
     checkAuth()
-  }, [])
+  }, [checkAuth])
 
   useEffect(() => {
     if (!pathname || !user) return
@@ -71,32 +97,6 @@ export function AppLayout({ children }: AppLayoutProps) {
 
     loadPendingCount()
   }, [activeFarmId, user])
-
-  const checkAuth = async () => {
-    try {
-      const response = await fetch('/api/auth/me')
-      if (response.ok) {
-        const userData = await response.json()
-        setUser(userData.user)
-
-        // Set active farm to the first one or from localStorage
-        const savedFarmId = localStorage.getItem('activeFarmId')
-        const farms = userData.farms
-        if (savedFarmId && farms.some((f: any) => f.id === savedFarmId)) {
-          setActiveFarmId(savedFarmId)
-        } else if (farms.length > 0) {
-          setActiveFarmId(farms[0].id)
-          localStorage.setItem('activeFarmId', farms[0].id)
-        }
-      } else {
-        router.push('/login')
-      }
-    } catch (error) {
-      router.push('/login')
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const handleFarmChange = (farmId: string) => {
     setActiveFarmId(farmId)
